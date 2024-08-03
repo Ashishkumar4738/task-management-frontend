@@ -1,24 +1,43 @@
-import logo from './logo.svg';
+
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import './App.css';
+import Home from "./components/Home"
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import Alert from "./components/Alert";
+import { useState } from "react";
+import Logout from "./components/Logout";
+import ContextState from "./context/ContextState";
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  const handleAlert = (message, type) => {
+    setAlert(() => {
+      return {
+        message,
+        type
+      };
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 5000);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ContextState>
+        <BrowserRouter>
+          {alert && <Alert alert={alert} />}
+          <Routes>
+            <Route path="/" element={<Home handleAlert={handleAlert} /> } />
+            <Route path="/signup" element={<SignUp handleAlert={handleAlert} />} />
+            <Route path="/signin" element={<SignIn handleAlert={handleAlert} />} />
+            <Route path="/logout" element={<Logout handleAlert={handleAlert} />} />
+          </Routes>
+        </BrowserRouter>
+      </ContextState>
+    </>
   );
 }
 
