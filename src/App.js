@@ -1,7 +1,6 @@
-
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import './App.css';
-import Home from "./components/Home"
+import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Alert from "./components/Alert";
@@ -12,6 +11,7 @@ import ContextState from "./context/ContextState";
 function App() {
   const [alert, setAlert] = useState(null);
 
+  // Function to handle alerts
   const handleAlert = (message, type) => {
     setAlert(() => {
       return {
@@ -19,6 +19,7 @@ function App() {
         type
       };
     });
+    // Automatically dismiss alert after 5 seconds
     setTimeout(() => {
       setAlert(null);
     }, 5000);
@@ -28,11 +29,16 @@ function App() {
     <>
       <ContextState>
         <BrowserRouter>
+          {/* Display alert if present */}
           {alert && <Alert alert={alert} />}
           <Routes>
-            <Route path="/" element={<Home handleAlert={handleAlert} /> } />
+            {/* Home route */}
+            <Route path="/" element={<Home handleAlert={handleAlert} />} />
+            {/* Sign up route */}
             <Route path="/signup" element={<SignUp handleAlert={handleAlert} />} />
+            {/* Sign in route */}
             <Route path="/signin" element={<SignIn handleAlert={handleAlert} />} />
+            {/* Logout route */}
             <Route path="/logout" element={<Logout handleAlert={handleAlert} />} />
           </Routes>
         </BrowserRouter>

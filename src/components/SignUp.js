@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from "axios";
 import {motion} from "framer-motion"
+import Loader from './Loader';
 const SignUp = (props) => {
   const [crediential, setCrediential] = useState({
     name: "",
@@ -9,6 +10,7 @@ const SignUp = (props) => {
     password: "",
     address: ""
   });
+  const [loading,setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,13 +26,14 @@ const SignUp = (props) => {
       return;
     }
     try {
+      setLoading(true);
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/signup`, {
         name: crediential.name,
         email: crediential.email,
         password: crediential.password,
         address: crediential.address
       });
-
+      setLoading(false);
       if (response.data.success) {
         console.log(response);
         localStorage.setItem('token', response.data.jwtToken);
@@ -54,7 +57,8 @@ const SignUp = (props) => {
 
   return (
     <>
-      <div className='relative w-screen h-screen flex overflow-hidden ' >
+    {loading && <Loader className={"z-10 top-[50%] left-[50%] "} />}
+      <div className='absolute top-0 z-0 w-screen h-screen flex md:flex-row flex-col overflow-x-hidden ' >
       <motion.div
       initial={
         {opacity:0,x:500}
@@ -65,7 +69,7 @@ const SignUp = (props) => {
       transition={
         {duration:1.2,type:"spring"}
       }
-      className='relative right w-[50%] h-screen bg-slate-300/60 ' >
+      className='relative right md:w-[50%] h-screen bg-slate-300/60 ' >
           <div className=' flex w-full h-full justify-center items-center' >
             <div className='w-[225px] h-[225px] bg-purple-900 rounded-full ' />
           </div>
@@ -82,11 +86,11 @@ const SignUp = (props) => {
         transition={
           {duration:1.2,type:"spring"}
         }
-        className='left w-[50%] bg-white-500 h-screen flex flex-col justify-center place-content-center items-center  ' >
-          <div className='relative w-[65%]  px-3 py-1 '>
+        className='left md:w-[50%] bg-white-500 h-screen flex flex-col justify-center place-content-center items-center  ' >
+          <div className='relative w-[90%] md:w-[65%]  px-3 py-1 '>
            
-            <h1 className='text-4xl font-semibold my-4  ' >Create account</h1>
-            <p className='text-pretty mb-8 text-xl '>Welcome! Please enter your details.</p>
+            <h1 className='text-2xl md:text-4xl font-semibold my-4  ' >Create account</h1>
+            <p className='text-pretty mb-2 md:mb-8 md:text-xl '>Welcome! Please enter your details.</p>
             <form className='flex flex-col ' onSubmit={handleSubmit} >
               <label htmlFor='name' className='font-semibold text-base mb-2  ' >Name</label>
               <input className='text-black py-3 px-2 border-2 border-gray-400 rounded-[10px] mb-4 ' type="text" name='name' placeholder='Enter your name' value={crediential.name} onChange={handleChange} />
