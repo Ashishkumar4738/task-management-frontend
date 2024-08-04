@@ -24,6 +24,7 @@ const Home = (props) => {
     }
   }, [navigate, props, getTaskList]); // Include getTaskList in the dependency array
 
+
   const updateTask = (task) => {
     setSelectedTask(task);
   }

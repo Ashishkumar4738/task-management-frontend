@@ -15,12 +15,14 @@ const ContextState = (props) => {
           auth_token: localStorage.getItem("token")
         }
       });
-      setLoading(false);
-      console.log(response.data.task);
+      
       setTaskList(response.data.task);
       setUsername(response.data.name);
     } catch (error) {
-      console.log(error);
+      console.log(error);  
+    }
+    finally{
+      setLoading(false);
     }
   }, []); // Empty dependency array to ensure the function doesn't change
 

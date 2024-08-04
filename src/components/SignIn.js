@@ -23,7 +23,6 @@ const SignIn = (props) => {
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
-    console.log("handle login submit email -==  ");
     setLoading(true);
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/signin`,{
@@ -34,6 +33,7 @@ const SignIn = (props) => {
       if(response.data.success){
         localStorage.setItem("token",response.data.jwtToken);
         props.handleAlert(response.data.message,"success");
+        
         setUsername(response.data.name);
         navigate("/");
       }else{
@@ -42,8 +42,11 @@ const SignIn = (props) => {
       
     } catch (error) {
       console.log(error);
-      props.handleAlert("Some server side error occured","error");
-      navigate("/signin");
+      props.handleAlert(error.response.data.message||"Some error occured","error");
+      navigate("/signup");
+    }
+    finally{
+      setLoading(false);
     }
   }
 

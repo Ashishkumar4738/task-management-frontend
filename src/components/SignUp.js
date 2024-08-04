@@ -33,9 +33,7 @@ const SignUp = (props) => {
         password: crediential.password,
         address: crediential.address
       });
-      setLoading(false);
       if (response.data.success) {
-        console.log(response);
         localStorage.setItem('token', response.data.jwtToken);
         props.handleAlert('Your account created successfully', 'success');
         navigate('/');
@@ -44,8 +42,10 @@ const SignUp = (props) => {
         navigate('/signup');
       }
     } catch (error) {
-      console.error('There was an error!', error.response.data);
-      props.handleAlert(error.response.data.message, 'error');
+      props.handleAlert(error.response.data.message||"Some error occured!", 'error');
+    }
+    finally{
+      setLoading(false);
     }
   };
 

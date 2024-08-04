@@ -35,7 +35,7 @@ const CreateNewTask = (props) => {
     <>
       { loading && <Loader className={"z-10 top-[0%] left-[50%] "} />}
       <div className='overflow-hidden absolute left-[10%] md:left-[25%] top-[10%] w-[80%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4'>
-      <p className='absolute right-10  border-2 border-black px-2 rounded-full top-2 shadow-lg shadow-white/20 font-bold cursor-pointer  ' onClick={close} >X</p>
+      <p className='absolute right-5  border-2 border-black px-2 rounded-full top-2 shadow-lg shadow-white/20 font-bold cursor-pointer  ' onClick={close} >X</p>
         <form onSubmit={handleSubmit} >
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2">Title</label>
