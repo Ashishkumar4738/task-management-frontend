@@ -42,10 +42,14 @@ const SignIn = (props) => {
       
     } catch (error) {
       console.log(error);
-      if(error.response.data.errors){
-        props.handleAlert(error.response.data.errors[0].msg || "Some error occured","error");
+      if(error && error.response){
+        if(error.response.data.errors){
+          props.handleAlert(error.response.data.errors[0].msg,"error");
+        }else{
+          props.handleAlert(error.response.data.message ,"error");
+        }
       }else{
-        props.handleAlert(error.response.data.message ,"error");
+        props.handleAlert("Some error occured","error");
       }
     }
     finally{
