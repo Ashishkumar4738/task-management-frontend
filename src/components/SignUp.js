@@ -42,7 +42,11 @@ const SignUp = (props) => {
         navigate('/signup');
       }
     } catch (error) {
-      props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+      if (error.response.data.errors) {
+        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+      } else {
+        props.handleAlert(error.response.data.message, "error");
+      }
     }
     finally {
       setLoading(false);

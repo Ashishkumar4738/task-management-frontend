@@ -32,18 +32,21 @@ const SignIn = (props) => {
       setLoading(false);
       if(response.data.success){
         localStorage.setItem("token",response.data.jwtToken);
-        props.handleAlert(response.data.message,"success");
+        props.handleAlert(response.data.message||"Successfully logged","success");
         
         setUsername(response.data.name);
         navigate("/");
       }else{
-        props.handleAlert(response.data.message,"error");
+        props.handleAlert(response.data.message||"some error","error");
       }
       
     } catch (error) {
       console.log(error);
-      props.handleAlert(error.response.data.errors[0].msg||"Some error occured","error");
-      navigate("/signup");
+      if(error.response.data.errors){
+        props.handleAlert(error.response.data.errors[0].msg || "Some error occured","error");
+      }else{
+        props.handleAlert(error.response.data.message ,"error");
+      }
     }
     finally{
       setLoading(false);

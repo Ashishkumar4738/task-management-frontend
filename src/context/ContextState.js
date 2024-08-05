@@ -5,7 +5,7 @@ import axios from "axios";
 const ContextState = (props) => {
   const [taskList, setTaskList] = useState([]);
   const [username, setUsername] = useState("");
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getTaskList = useCallback(async () => {
     try {
@@ -15,13 +15,17 @@ const ContextState = (props) => {
           auth_token: localStorage.getItem("token")
         }
       });
-      
+
       setTaskList(response.data.task);
       setUsername(response.data.name);
     } catch (error) {
-      console.log(error);  
+      if (error.response.data.errors) {
+        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+      } else {
+        props.handleAlert(error.response.data.message, "error");
+      }
     }
-    finally{
+    finally {
       setLoading(false);
     }
   }, []); // Empty dependency array to ensure the function doesn't change
@@ -34,16 +38,19 @@ const ContextState = (props) => {
           auth_token: localStorage.getItem("token")
         }
       });
-      if(response.data.success){
-        props.handleAlert(response.data.message,"success");
-      }else{
-        props.handleAlert(response.data.message,"error");
+      if (response.data.success) {
+        props.handleAlert(response.data.message, "success");
+      } else {
+        props.handleAlert(response.data.message, "error");
       }
     } catch (error) {
-      console.error(error);
-      props.handleAlert("Some server side error","error");
+      if (error.response.data.errors) {
+        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+      } else {
+        props.handleAlert(error.response.data.message, "error");
+      }
     }
-    finally{
+    finally {
       setLoading(false);
     }
   }
@@ -60,16 +67,20 @@ const ContextState = (props) => {
           }
         });
       console.log(response);
-      if(response.data.success){
-        props.handleAlert(response.data.message,"success");
-      }else{
-        props.handleAlert(response.data.message,"error");
+      if (response.data.success) {
+        props.handleAlert(response.data.message, "success");
+      } else {
+        props.handleAlert(response.data.message, "error");
       }
     } catch (error) {
       console.error(error);
-      props.handleAlert("Some server side error","error");
+      if (error.response.data.errors) {
+        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+      } else {
+        props.handleAlert(error.response.data.message, "error");
+      }
     }
-    finally{
+    finally {
       setLoading(false);
     }
   }
@@ -85,16 +96,20 @@ const ContextState = (props) => {
           }
         }
       );
-      if(response.data.success){
-        props.handleAlert(response.data.message,"success");
-      }else{
-        props.handleAlert(response.data.message,"error");
+      if (response.data.success) {
+        props.handleAlert(response.data.message, "success");
+      } else {
+        props.handleAlert(response.data.message, "error");
       }
     } catch (error) {
-      props.handleAlert(error.response.data.errors[0].msg||"Some error occured","error")
-      console.error("error in create task ",error.response.data.errors[0].msg);
+      if (error.response.data.errors) {
+        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+      } else {
+        props.handleAlert(error.response.data.message, "error");
+      }
+      console.error("error in create task ", error.response.data.errors[0].msg);
     }
-    finally{
+    finally {
       setLoading(false);
     }
   }
