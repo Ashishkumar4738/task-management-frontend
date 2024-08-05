@@ -83,7 +83,7 @@ const CreateNewTask = (props) => {
             />
           </div>
           <button type="submit" className="w-full py-2 bg-purple-800 text-white font-semibold rounded-md">
-            Update Task
+            Create Task
           </button>
         </form>
       </div>

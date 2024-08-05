@@ -16,9 +16,9 @@ function Alert(props) {
 
   return (
     <>
-      <div className="absolute top-5 right-10 z-50 flex justify-end">
+      <div className="absolute top-5 right-2 md:right-10 z-50 flex justify-end">
         {props.alert && (
-          <div className={`${props.alert.type === 'success' ? "bg-green-300/60 text-green-500 " : props.alert.type === 'warning' ? "bg-yellow-300/60 text-yellow-500 " : "bg-red-300/60 text-red-500"} px-4 py-2 rounded-[20px]`}>
+          <div className={`${props.alert.type === 'success' ? "bg-green-300 text-green-500 " : props.alert.type === 'warning' ? "bg-yellow-300 text-yellow-500 " : "bg-red-300 text-red-500"} px-4 py-2 rounded-[20px]`}>
             <strong>{toUpper()}!</strong> {props.alert.message}
           </div>
         )}

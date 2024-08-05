@@ -34,12 +34,17 @@ const ContextState = (props) => {
           auth_token: localStorage.getItem("token")
         }
       });
-      setLoading(false);
-      if (response.data.success) {
-        return true;
+      if(response.data.success){
+        props.handleAlert(response.data.message,"success");
+      }else{
+        props.handleAlert(response.data.message,"error");
       }
     } catch (error) {
       console.error(error);
+      props.handleAlert("Some server side error","error");
+    }
+    finally{
+      setLoading(false);
     }
   }
 
@@ -54,10 +59,18 @@ const ContextState = (props) => {
             auth_token: localStorage.getItem('token')
           }
         });
-        setLoading(false);
       console.log(response);
+      if(response.data.success){
+        props.handleAlert(response.data.message,"success");
+      }else{
+        props.handleAlert(response.data.message,"error");
+      }
     } catch (error) {
       console.error(error);
+      props.handleAlert("Some server side error","error");
+    }
+    finally{
+      setLoading(false);
     }
   }
 
@@ -72,10 +85,17 @@ const ContextState = (props) => {
           }
         }
       );
-      setLoading(false);
-      console.log(response);
+      if(response.data.success){
+        props.handleAlert(response.data.message,"success");
+      }else{
+        props.handleAlert(response.data.message,"error");
+      }
     } catch (error) {
-      console.error(error);
+      props.handleAlert(error.response.data.errors[0].msg||"Some error occured","error")
+      console.error("error in create task ",error.response.data.errors[0].msg);
+    }
+    finally{
+      setLoading(false);
     }
   }
 

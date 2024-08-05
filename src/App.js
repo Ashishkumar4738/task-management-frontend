@@ -22,12 +22,12 @@ function App() {
     // Automatically dismiss alert after 5 seconds
     setTimeout(() => {
       setAlert(null);
-    }, 5000);
+    }, 4000);
   }
 
   return (
     <>
-      <ContextState>
+      <ContextState handleAlert={handleAlert} >
         <BrowserRouter>
           {/* Display alert if present */}
           {alert && <Alert alert={alert} />}

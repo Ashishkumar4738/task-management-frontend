@@ -42,7 +42,7 @@ const SignIn = (props) => {
       
     } catch (error) {
       console.log(error);
-      props.handleAlert(error.response.data.message||"Some error occured","error");
+      props.handleAlert(error.response.data.errors[0].msg||"Some error occured","error");
       navigate("/signup");
     }
     finally{
@@ -73,7 +73,7 @@ const SignIn = (props) => {
 
               <button type='submit' className='w-full rounded-[10px] py-3 px-1 text-xl font-semibold bg-purple-800 text-white  '  >Sign in</button>
             </form>
-            <p className='text-gray-500 self-center w-full text-center mt-6 ' >Don't have an account? <span className='text-purple-800 font-medium' > <Link to="/signup" >Sign up</Link> </span></p>
+            <p className='text-gray-500 self-center w-full text-center mt-6 ' >Don't have an account? <span className='text-purple-800 font-medium' > <Link to="/signup" className='underline' >Sign up</Link> </span></p>
           </div>
         </motion.div>
 
