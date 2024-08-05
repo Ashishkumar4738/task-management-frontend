@@ -19,10 +19,13 @@ const ContextState = (props) => {
       setTaskList(response.data.task);
       setUsername(response.data.name);
     } catch (error) {
-      if (error.response.data.errors) {
-        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
-      } else {
-        props.handleAlert(error.response.data.message, "error");
+      if(error.response){
+        if (error.response.data.errors) {
+          props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+        } else {
+          props.handleAlert(error.response.data.message, "error");
+        }
+
       }
     }
     finally {
@@ -44,10 +47,13 @@ const ContextState = (props) => {
         props.handleAlert(response.data.message, "error");
       }
     } catch (error) {
-      if (error.response.data.errors) {
-        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
-      } else {
-        props.handleAlert(error.response.data.message, "error");
+      if(error.response){
+        if (error.response.data.errors) {
+          props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+        } else {
+          props.handleAlert(error.response.data.message, "error");
+        }
+
       }
     }
     finally {
@@ -74,10 +80,13 @@ const ContextState = (props) => {
       }
     } catch (error) {
       console.error(error);
-      if (error.response.data.errors) {
-        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
-      } else {
-        props.handleAlert(error.response.data.message, "error");
+      if(error.response){
+        if (error.response.data.errors) {
+          props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+        } else {
+          props.handleAlert(error.response.data.message, "error");
+        }
+
       }
     }
     finally {
@@ -102,10 +111,13 @@ const ContextState = (props) => {
         props.handleAlert(response.data.message, "error");
       }
     } catch (error) {
-      if (error.response.data.errors) {
-        props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
-      } else {
-        props.handleAlert(error.response.data.message, "error");
+      if(error.response){
+        if (error.response.data.errors) {
+          props.handleAlert(error.response.data.errors[0].msg || "Some error occured", "error");
+        } else {
+          props.handleAlert(error.response.data.message, "error");
+        }
+
       }
       console.error("error in create task ", error.response.data.errors[0].msg);
     }
