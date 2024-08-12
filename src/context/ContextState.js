@@ -43,9 +43,7 @@ const ContextState = (props) => {
       });
       if (response.data.success) {
         props.handleAlert(response.data.message, "success");
-      } else {
-        props.handleAlert(response.data.message, "error");
-      }
+      } 
     } catch (error) {
       if(error.response){
         if (error.response.data.errors) {
@@ -75,9 +73,7 @@ const ContextState = (props) => {
       console.log(response);
       if (response.data.success) {
         props.handleAlert(response.data.message, "success");
-      } else {
-        props.handleAlert(response.data.message, "error");
-      }
+      } 
     } catch (error) {
       console.error(error);
       if(error.response){
@@ -107,9 +103,7 @@ const ContextState = (props) => {
       );
       if (response.data.success) {
         props.handleAlert(response.data.message, "success");
-      } else {
-        props.handleAlert(response.data.message, "error");
-      }
+      } 
     } catch (error) {
       if(error.response){
         if (error.response.data.errors) {
@@ -119,7 +113,6 @@ const ContextState = (props) => {
         }
 
       }
-      console.error("error in create task ", error.response.data.errors[0].msg);
     }
     finally {
       setLoading(false);
