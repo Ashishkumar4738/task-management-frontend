@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import ContextProvider from '../context/ContextProvider';
 import Loader from './Loader';
-
+import { motion } from 'framer-motion';
 const UpdateForm = (props) => {
   const [credentials, setCredentials] = useState({
     title: props.task.title || "",
@@ -26,10 +26,27 @@ const UpdateForm = (props) => {
     props.setSelectedTask(null);
   }
 
+  const hidden = {
+    y:-400,
+    opacity:0,
+    scale:0
+  }
+  const visible = {
+    y:0,
+    opacity:1,
+    scale:1,
+    transition: { duration: 0.5
+     }
+  }
+
   return (
     <>
     {loading && <Loader className={"z-10 top-[0%] left-[50%] "} />}
-      <div className='absolute left-[5%] md:left-[25%] top-[10%] w-[90%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4'>
+      <motion.div
+      
+      initial={hidden}
+      animate={visible}
+      className='absolute left-[5%] md:left-[25%] top-[10%] w-[90%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4'>
       <p className='absolute right-5  border-2 border-black px-2 rounded-full top-2 shadow-lg shadow-white/20 font-bold cursor-pointer  ' onClick={close} >X</p>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -81,7 +98,7 @@ const UpdateForm = (props) => {
             Update Task
           </button>
         </form>
-      </div>
+      </motion.div>
     </>
   );
 };

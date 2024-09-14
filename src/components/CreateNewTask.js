@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import ContextProvider from '../context/ContextProvider';
 import Loader from './Loader';
-
+import { motion } from 'framer-motion';
 const CreateNewTask = (props) => {
   const [credentials, setCredentials] = useState({
     title:  "",
@@ -18,14 +18,35 @@ const CreateNewTask = (props) => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    handleCreate(credentials);
-    close();
+    if(credentials.title.length===0){
+      props.handleAlert("Title can't be empty!","warning");
+    }else if(credentials.description.length<10){
+      props.handleAlert("Description must have atleast 10 characters!","warning");
+    }else if(credentials.dueStatus.length===0){
+      props.handleAlert("Please select a date!","warning");
+    }else{
+      handleCreate(credentials);
+      close();
+    }
 
   }
 
   const close = ()=>{
     props.setCreate(false);
   }
+
+  const hidden = {
+    y:-400,
+    opacity:0,
+    scale:0
+  }
+  const visible = {
+    y:0,
+    opacity:1,
+    scale:1,
+    transition: { duration: 0.5 }
+  }
+
 
 
 
@@ -34,8 +55,14 @@ const CreateNewTask = (props) => {
   return (
     <>
       { loading && <Loader className={"z-10 top-[0%] left-[50%] "} />}
-      <div className='overflow-hidden absolute left-[10%] md:left-[25%] top-[10%] w-[80%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4'>
+      <motion.div
+
+      initial={hidden}
+      animate={visible}
+      
+      className='overflow-hidden absolute left-[10%] md:left-[25%] top-[10%] w-[80%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4'>
       <p className='absolute right-5  border-2 border-black px-2 rounded-full top-2 shadow-lg shadow-white/20 font-bold cursor-pointer  ' onClick={close} >X</p>
+      
         <form onSubmit={handleSubmit} >
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2">Title</label>
@@ -86,7 +113,7 @@ const CreateNewTask = (props) => {
             Create Task
           </button>
         </form>
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -99,7 +99,7 @@ const Home = (props) => {
 
         {selectedTask && <UpdateForm task={selectedTask} handleAlert={props.handleAlert} setSelectedTask={setSelectedTask} />}
         {view && <ViewCard task={view} setView={setView} />}
-        {create && <CreateNewTask setCreate={setCreate} />}
+        {create && <CreateNewTask setCreate={setCreate} handleAlert={props.handleAlert} />}
       </div>
     </>
   )
