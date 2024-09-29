@@ -5,7 +5,8 @@ import UpdateForm from './UpdateForm';
 import ViewCard from './ViewCard';
 import CreateNewTask from './CreateNewTask';
 import Loader from './Loader';
-
+import { DeleteIcon, EditIcon, ViewIcon } from './Icons';
+import { motion } from 'framer-motion';
 const Home = (props) => {
   const navigate = useNavigate();
   const context = useContext(ContextProvider);
@@ -61,33 +62,66 @@ const Home = (props) => {
 
   return (
     <>
-       {loading && <Loader className={"z-10 top-[50%] left-[50%] "} />}
+      {loading && <Loader className={"z-10 top-[50%] left-[50%] "} />}
       <div className='absolute top-0 z-0 w-screen h-screen flex flex-col items-center'>
         <h1 className='text-2xl md:text-3xl mt-10 font-bold'>Welcome! <span className='font-semibold text-purple-800'>{username || "User"}</span></h1>
-        <p className='text-xl font-medium text-gray-400 my-4'>List of your tasks.</p>
+        <p className='text-md sm:text-lg font-medium text-gray-400 my-4'>List of your tasks.</p>
 
-        <button className='absolute right-1 md:right-20 md:top-10 top-20 font-medium shadow-2xl shadow-purple-400 border-2 border-black px-3 py-1 rounded-lg'>
+        <motion.button
+          whileTap={{scale:0.8}}
+        className='absolute right-1 md:right-20 md:top-10 top-20 font-medium shadow-2xl shadow-purple-400 border-2 border-black px-3 py-1 rounded-lg'>
+          <motion.div
+            whileHover={{scale:1.1}}
+
+>
           <Link to="/logout">Log out</Link>
-        </button>
+          </motion.div>
+        </motion.button>
 
         <div className='absolute w-1/2 h-1/2 rounded-full bg-purple-400/40 blur-[120px] backdrop-blur-[120px] -z-10' />
 
         <p className={`absolute bottom-32 right-20 invisible ${visible && "visible"}`}>Add new task</p>
-        <button className='fixed bottom-20 right-2 md:right-24 text-4xl border-4 border-white rounded-full px-3 font-bold bg-purple pb-2 bg-purple-400/60 text-white z-10 ' onMouseEnter={handleVisible} onMouseOut={handleVisible} onClick={handleCreate}>+</button>
+        <motion.button
 
-        <div className='grid  md:grid-cols-3 w-[90%] mt-10 gap-14'>
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.8 }}
+          className='fixed bottom-20 right-2 md:right-24 text-4xl border-4 border-black rounded-full px-3 font-bold bg-purple pb-2 bg-purple-400/60 text-black shadow-lg shadow-black z-10  ' onMouseEnter={handleVisible} onMouseOut={handleVisible} onClick={handleCreate}>+</motion.button>
+
+        <div className='grid  sm:grid-cols-2 lg:grid-cols-3 w-[90%] mt-10 gap-14'>
           {taskList && taskList.map((value, index) => (
             <div key={index} className='bg-white/60 backdrop-blur-2xl w-full px-4 py-2 rounded-[20px] shadow-xl'>
               <div className='relative flex flex-wrap justify-between items-center w-full'>
                 <h1 className='text-lg md:text-3xl font-bold'>{value.title}</h1>
                 <div className='flex gap-2 flex-row-reverse'>
-                  <p className='font-light md:font-normal underline underline-offset-2 cursor-pointer' onClick={() => handleView(value)}>view</p>
-                  <p className='font-light md:font-normal underline underline-offset-2 cursor-pointer' onClick={() => updateTask(value)}>Edit</p>
-                  <p className='font-light md:font-normal underline underline-offset-2 cursor-pointer' onClick={() => deleteTask(value._id)}>Delete</p>
+                  <motion.p
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
+                    className=' font-light md:font-normal underline underline-offset-2  cursor-pointer  ' onClick={() => handleView(value)}>
+                    <ViewIcon />
+                  </motion.p>
+                  <div className='border-r-2 border-black pr-2 ' >
+                    <motion.p
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.8 }}
+                      className='font-light md:font-normal underline underline-offset-2 cursor-pointer' onClick={() => updateTask(value)}>
+                      <EditIcon />
+
+                    </motion.p>
+                  </div>
+                  <div className='border-r-2 border-black pr-2 ' >
+                    <motion.p
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.8 }}
+                      className='font-light md:font-normal underline underline-offset-2 cursor-pointer' onClick={() => deleteTask(value._id)}>
+
+                      <DeleteIcon />
+
+                    </motion.p>
+                  </div>
                 </div>
               </div>
               <hr />
-              <p className={ `text-xs sm:text-sm md:text-xl font-medium py-4 ${value.status && "line-through text-green-500"}`}>{value.description.length < 100 ? value.description : value.description.slice(0, 50) + "...."}</p>
+              <p className={`text-xs sm:text-sm md:text-xl font-medium py-4 ${value.status && "line-through text-green-500"}`}>{value.description.length < 100 ? value.description : value.description.slice(0, 50) + "...."}</p>
               <hr />
               <div className='flex justify-between'>
                 <p>{calculateRemainingTime(value.dueStatus)}</p>

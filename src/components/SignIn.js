@@ -78,7 +78,10 @@ const SignIn = (props) => {
               <input className='text-black py-3 px-2 border-2 border-gray-400 rounded-[10px]' type="password" name='password' placeholder='Enter your password' value={crediential.password} onChange={handleChange} />
               <p className='self-end my-4 text-purple-800 font-semibold ' >Forgot password</p>
 
-              <button type='submit' className='w-full rounded-[10px] py-3 px-1 text-xl font-semibold bg-purple-800 text-white  '  >Sign in</button>
+              <motion.button
+              whileHover={{scale:1.1}}
+              whileTap={{scale:0.8}}
+              type='submit' className='w-full rounded-[10px] py-3 px-1 text-xl font-semibold bg-purple-800 text-white  '  >Sign in</motion.button>
             </form>
             <p className='text-gray-500 self-center w-full text-center mt-6 ' >Don't have an account? <span className='text-purple-800 font-medium' > <Link to="/signup" className='underline' >Sign up</Link> </span></p>
           </div>

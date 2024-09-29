@@ -47,7 +47,11 @@ const UpdateForm = (props) => {
       initial={hidden}
       animate={visible}
       className='absolute left-[5%] md:left-[25%] top-[10%] w-[90%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4'>
-      <p className='absolute right-5  border-2 border-black px-2 rounded-full top-2 shadow-lg shadow-white/20 font-bold cursor-pointer  ' onClick={close} >X</p>
+      <motion.p
+      whileHover={{scale:1.2}}
+      whileTap={{scale:0.8}}
+      className='absolute right-5  border-2 border-black px-2 rounded-full top-2 shadow-lg shadow-white/20 font-bold cursor-pointer  ' onClick={close} >
+        X</motion.p>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2">Title</label>
