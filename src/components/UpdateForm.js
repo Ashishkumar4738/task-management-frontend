@@ -46,7 +46,7 @@ const UpdateForm = (props) => {
       
       initial={hidden}
       animate={visible}
-      className='absolute left-[5%] md:left-[25%] top-[10%] w-[90%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4'>
+      className='absolute left-[5%] md:left-[25%] top-[10%] w-[90%] md:w-[50%] max-h-max shadow-gray-400 shadow-lg bg-white/80 backdrop-blur-lg rounded-[20px] px-4 py-4 z-10 '>
       <motion.p
       whileHover={{scale:1.2}}
       whileTap={{scale:0.8}}

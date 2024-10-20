@@ -68,13 +68,13 @@ const Home = (props) => {
         <p className='text-md sm:text-lg font-medium text-gray-400 my-4'>List of your tasks.</p>
 
         <motion.button
-          whileTap={{scale:0.8}}
-        className='absolute right-1 md:right-20 md:top-10 top-20 font-medium shadow-2xl shadow-purple-400 border-2 border-black px-3 py-1 rounded-lg'>
+          whileTap={{ scale: 0.8 }}
+          className='absolute right-5 md:right-20 md:top-10 top-20 font-medium shadow-2xl shadow-purple-400 border-2 border-black px-3 py-1 rounded-[50px] text-xs md:text-sm w-min md:w-max  md:rounded-lg'>
           <motion.div
-            whileHover={{scale:1.1}}
+            whileHover={{ scale: 1.1 }}
 
->
-          <Link to="/logout">Log out</Link>
+          >
+            <Link to="/logout"  >Log out</Link>
           </motion.div>
         </motion.button>
 
@@ -85,14 +85,16 @@ const Home = (props) => {
 
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.8 }}
-          className='fixed bottom-20 right-2 md:right-24 text-4xl border-4 border-black rounded-full px-3 font-bold bg-purple pb-2 bg-purple-400/60 text-black shadow-lg shadow-black z-10  ' onMouseEnter={handleVisible} onMouseOut={handleVisible} onClick={handleCreate}>+</motion.button>
+          className='fixed bottom-5 right-5 md:bottom-20 md:right-24 text-4xl border-4 border-black rounded-full px-3 font-bold bg-purple pb-2 bg-purple-400/60 text-black shadow-lg shadow-black z-10  ' onMouseEnter={handleVisible} onMouseOut={handleVisible} onClick={handleCreate}>+</motion.button>
 
-        <div className='grid  sm:grid-cols-2 lg:grid-cols-3 w-[90%] mt-10 gap-14'>
+
+
+        <div className='grid  sm:grid-cols-2 lg:grid-cols-3 w-[90%] mt-10 gap-14  '>
           {taskList && taskList.map((value, index) => (
-            <div key={index} className='bg-white/60 backdrop-blur-2xl w-full px-4 py-2 rounded-[20px] shadow-xl'>
-              <div className='relative flex flex-wrap justify-between items-center w-full'>
+            <div key={index} className='bg-white/60 backdrop-blur-2xl w-full px-4 py-2 h-min rounded-[20px] shadow-xl'>
+              <div className='relative flex flex-wrap justify-between items-center w-full h-min '>
                 <h1 className='text-lg md:text-3xl font-bold'>{value.title}</h1>
-                <div className='flex gap-2 flex-row-reverse'>
+                <div className='flex gap-2 flex-row-reverse   '>
                   <motion.p
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
