@@ -83,7 +83,7 @@ const Home = (props) => {
         <p className={`absolute bottom-32 right-20 invisible ${visible && "visible"}`}>Add new task</p>
         <motion.button
 
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.1}}
           whileTap={{ scale: 0.8 }}
           className='fixed bottom-5 right-5 md:bottom-20 md:right-24 text-4xl border-4 border-black rounded-full px-3 font-bold bg-purple pb-2 bg-purple-400/60 text-black shadow-lg shadow-black z-10  ' onMouseEnter={handleVisible} onMouseOut={handleVisible} onClick={handleCreate}>+</motion.button>
 

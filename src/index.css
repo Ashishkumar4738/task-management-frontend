@@ -26,6 +26,7 @@ code {
   background-repeat: no-repeat;
   animation: l17 1s infinite linear;
   position: relative;
+  margin-left: -35px;
 }
 .loader::before {    
   content:"";
@@ -43,6 +44,8 @@ code {
 @keyframes l17 { 
   100%{transform: rotate(1turn)}
 }
+
+
 
 
 
